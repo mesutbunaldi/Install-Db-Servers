@@ -1,0 +1,36 @@
+---
+# tasks file for myrole
+-  name: Print the gateway for each host when defined
+   ansible.builtin.debug:
+    msg: Hello world
+
+- name:  requirements 1 for installation
+  ansible.builtin.apt:
+    pkg:
+     - software-properties-common
+     - dirmngr
+     - apt-transport-https
+    state: present
+
+- name: requirements 2 for installation
+  ansible.builtin.apt_key:
+    url: https://mariadb.org/mariadb_release_signing_key.asc
+    state: present
+
+- name: requirements 3 for installation
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64,arm64,ppc64el,s390x] https://mirror.truenetwork.ru/mariadb/repo/10.7/ubuntu focal main
+    state: present
+    filename: mariadb
+
+- name: requirements 4 apt update 
+  ansible.builtin.apt:
+    name: mariadb-server
+    update_cache: yes
+    state: present
+
+- name: Ensure started the mariadb service
+  ansible.builtin.service:
+    name: mariadb
+    state: started
+    

@@ -1,0 +1,33 @@
+---
+- name: download consul template zip
+  ansible.builtin.get_url:
+    url: https://releases.hashicorp.com/consul-template/{{ consul_template_version }}/consul-template_0.27.2_linux_amd64.zip
+    dest: /tmp/consul-template.zip
+    checksum: sha256:d3d428ede8cb6e486d74b74deb9a7cdba6a6de293f3311f178cc147f1d1837e8
+  # when: not consul_template.stat.exists
+
+- name: Download
+  ansible.builtin.unarchive:
+    src: /tmp/consul-template.zip
+    dest: /usr/local/bin
+    remote_src: yes
+  # when: not consul_template.stat.exists
+
+- name: create consul template config folder
+  ansible.builtin.file:
+    path: /etc/consul-template.d
+    state: directory
+    mode: '0755'
+
+- name: create consul template service
+  ansible.builtin.template:
+    src: consul-template.service.j2
+    dest: /etc/systemd/system/consul-template.service
+    mode: '1777'
+
+- name: ensure started to consul template service
+  ansible.builtin.service:
+    name: consul-template
+    state: started
+    enabled: true
+    

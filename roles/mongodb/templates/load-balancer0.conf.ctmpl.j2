@@ -1,0 +1,13 @@
+upstream backend{{ inventory_hostname }} {
+{{ '{{-' }} range service {{ inventory_hostname }} {{ '}}' }
+  server {{ '{{' }} .Address {{ '}}' }}:{{ '{{' } .Port {{ '}}' };
+{{ '{{-' }} end }}
+}
+
+server {
+   listen 80;
+
+   location / {
+      proxy_pass http://backend{{ inventory_hostname }};
+   }
+}

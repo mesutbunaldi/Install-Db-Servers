@@ -1,0 +1,19 @@
+[all]
+
+webserver1      ansible_host=192.168.56.21
+webserver2      ansible_host=192.168.56.22
+webserver3      ansible_host=192.168.56.23
+
+
+
+[mongodb]
+
+
+[postresqldb]
+
+
+[mysqldb]
+webserver1
+webserver2
+webserver3
+

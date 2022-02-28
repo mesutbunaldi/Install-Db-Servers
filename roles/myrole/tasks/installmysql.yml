@@ -1,0 +1,7 @@
+---
+- name:  requirements 1 for installation
+  ansible.builtin.apt:
+    pkg:
+     - software-properties-common
+     - dirmngr
+     - apt-transport-https

@@ -1,0 +1,16 @@
+---
+- hosts: all
+  roles: 
+
+
+- hosts: mongodb
+  roles: 
+  
+
+- hosts: postresqldb
+  roles: 
+
+
+- hosts: mysqldb
+  roles:   
+  - myrole

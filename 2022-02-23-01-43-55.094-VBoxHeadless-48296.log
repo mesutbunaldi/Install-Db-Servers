@@ -1,0 +1,12 @@
+Log created: 2022-02-23T01:43:55.940020000Z
+Process ID:  48296 (0xbca8)
+Parent PID:  2123 (0x84b)
+Executable:  /usr/lib/virtualbox/VBoxHeadless
+Arg[0]: /usr/lib/virtualbox/VBoxHeadless
+Arg[1]: --comment
+Arg[2]: ansible-mesut-v110_machine2_1645568315869_81574
+Arg[3]: --startvm
+Arg[4]: 2cd753b5-1080-4ccf-99d8-cc96cbd94c5e
+Arg[5]: --vrde
+Arg[6]: config
+AddRef: illegal refcnt=3221225469 state=2
