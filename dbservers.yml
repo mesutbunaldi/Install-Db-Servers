@@ -13,4 +13,4 @@
 
 - hosts: mysqldb
   roles:   
-  - myrole
+  - mysqlInstall
