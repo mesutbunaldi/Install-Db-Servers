@@ -17,18 +17,13 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "machine1" do |machine|
     machine.vm.hostname = "machine1"
-    machine.vm.network :private_network, ip: "192.168.56.21"
-  end
-
-  config.vm.define "machine2" do |machine|
-    machine.vm.hostname = "machine2"
     machine.vm.network :private_network, ip: "192.168.56.22"
   end
-
-  config.vm.define "machine3" do |machine|
-    machine.vm.hostname = "machine3"
+  config.vm.define "machine2" do |machine|
+    machine.vm.hostname = "machine2"
     machine.vm.network :private_network, ip: "192.168.56.23"
   end
+ 
 
 
   config.vm.provision "ansible" do |ansible|
@@ -37,7 +32,7 @@ Vagrant.configure(2) do |config|
     ansible.inventory_path = "inventory/dev/vagrant/hosts"
     ansible.limit = "all"
     ansible.become = true
-    ansible.verbose = "vvv"
+    ansible.verbose = "v"
     #ansible.config+file = 'ansible.cfg'
   end
 

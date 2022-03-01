@@ -1,47 +1,37 @@
 ---
-- ansible.builtin.stat:
-    path: /usr/local/bin/consul-template
-  register: consul_template
 
-- ansible.builtin.debug:
-    msg: The files exist
-  when: not consul_template.stat.exists
+- name: Install message for PostreSQLDB
+  ansible.builtin.debug:
+    msg: Installing PostreSQL DB Server
 
-# TODO: Check consul template version
+- name: apt update
+  ansible.builtin.apt:
+    update_cache: yes
 
-- name: Include consul-template installation
-  ansible.builtin.import_tasks: install.yml
-  # when: not consul_template.stat.exists
+- name: install wget 
+  ansible.builtin.apt:
+    name: wget
+    state: present
 
-- debug:
-    msg: "{{ hostvars[item].app_domain }}"
-  with_items: "{{ groups['webservers'] }}"
+- name: install curl 
+  ansible.builtin.apt:
+    name: curl
+    state: present
 
-- name: sites
-  ansible.builtin.template:
-    src: load-balancer.conf.ctmpl.j2
-    dest: /etc/nginx/conf.d/{{ item }}.conf.ctmpl
-  with_items: "{{ groups['webservers'] }}"
+- name: install ca-certificates
+  ansible.builtin.apt:
+    name: ca-certificates
+    state: present
 
-- name: generate consul template config
-  ansible.builtin.template:
-    src: config.hcl.j2
-    dest: /etc/consul-template.d/config.hcl
 
-- name: restart to consul template service
-  ansible.builtin.service:
-    name: consul-template
-    state: restarted
+- name : insert key 
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
 
-# Check multiple file is exists
-#
-# - stat:
-#     path: "{{ item }}"
-#   register: file_details
-#   loop:
-#     - info.text
-#     - info.html
-#
-# - debug:
-#     msg: The files exist
-#   when: file_details.results|map(attribute='stat.exists') is all
+- name : add repo
+  ansible.builtin.apt_repository:
+    repo: deb  http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main
+    state: present
+    filename: postresql
+

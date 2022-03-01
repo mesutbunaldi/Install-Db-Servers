@@ -2,15 +2,10 @@
 - hosts: all
   roles: 
 
-
-- hosts: mongodb
-  roles: 
-  
-
-- hosts: postresqldb
-  roles: 
-
-
 - hosts: mysqldb
   roles:   
   - mysqlInstall
+
+- hosts: postresqldb
+  roles:   
+  - postresqldb
