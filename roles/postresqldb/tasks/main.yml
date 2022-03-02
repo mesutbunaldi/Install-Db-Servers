@@ -35,3 +35,14 @@
     state: present
     filename: postresql
 
+- name: apt update
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: install postresql 
+  ansible.builtin.apt:
+    name: 
+      - postgresql
+      - postgresql-contrib
+    state: present
+    update_cache : true

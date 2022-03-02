@@ -32,7 +32,7 @@ Vagrant.configure(2) do |config|
     ansible.inventory_path = "inventory/dev/vagrant/hosts"
     ansible.limit = "all"
     ansible.become = true
-    ansible.verbose = "v"
+    ansible.verbose = "vvv"
     #ansible.config+file = 'ansible.cfg'
   end
 
